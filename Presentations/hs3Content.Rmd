@@ -1,0 +1,57 @@
+
+# Motivation
+
+<!--
+
+* Difficult to run
+* What is the effect of the heuristics?
+* Does not use the the latest technology.
+* What about all the T1 data?
+
+-->
+
+## Main components of ASHS
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/ashs.png}
+
+# Joint Label Fusion
+
+## Modifications
+
+* Registration
+    * ``antsRegistration``
+    * B-spline SyN ("``-t BSplineSyN[...]``")
+    * generic label interpolation  ("``-n GenericLabel[Linear]``")
+* ``jointfusion`` $\rightarrow$ ``antsJointFusion``
+    * non-negative least squares option (vs. SVD)
+    * joint intensity fusion
+    * multi-threaded
+    * memory issues
+
+# Corrective learning
+
+* random forests & extreme gradient boosting (vs. AdaBoost)
+* 4 classes (vs. 2 classes)
+* implementation in ANTsR
+
+
+## Incorporate more prior knowledge
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning001.png}
+
+## Two-Class AdaBoost
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
+
+## Four-Class Random Forest or Extreme Gradient Boosting
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
+
+# Results:  Penn Data
+
+# Results:  UCI Data
+

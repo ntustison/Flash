@@ -1,0 +1,53 @@
+<!--
+http://adpd2017.kenes.com/submit-your-abstract/abstract-submission-guidelines#.V-04ezKZPUJ
+
+10.  Theme = ​β-Amyloid Diseases
+     Topic = Imaging, Biomarkers, Diagnostics
+     Sub-topic = Structural MRI
+
+11.   ntustison@virginia.edu
+      4173 Cardamon Circle
+      Corona, CA  92883
+
+12.   Nicholas Tustison, Department of Radiology and Medical Imaging, University of Virginia, Charlottesville, VA, USA
+      Brian Avants, Biogen, Cambridge, MA, USA
+      Hongzhi Wang, IBM Almaden Research Center, San Jose, CA, USA
+      Michael Yassa, Department of Neurobiology and Behavior, University of California, Irvine, Irvine, CA, USA
+
+13.   MULTI-ATLAS INTENSITY AND LABEL FUSION WITH SUPERVISED SEGMENTATION REFINEMENT FOR THE SUBPARCELLATION OF THE HIPPOCAMPUS
+
+-->
+
+MULTI-ATLAS INTENSITY AND LABEL FUSION WITH SUPERVISED SEGMENTATION REFINEMENT FOR THE SUBPARCELLATION OF THE HIPPOCAMPUS
+
+Objectives: To better characterize progression of neurodegenerative diseases which
+involve the hippocampus (such as Alzheimer's disease), significant research focus
+has been devoted to the accurate delineation of the hippocampus and its subfields.
+Due to the insights gained from "big data" efforts, such as ADNI, automation of
+these techniques is an absolute necessity.
+
+Methods:  We detail a significant modification of the ASHS (Automatic
+Segmentation of Hippocampal Subfields) framework [1] made available as open-source
+through the well-known Advanced Normalization Tools (ANTs) and its R-based extension,
+ANTsR.  Innovations include a new joint label fusion (JLF) implementation
+with the use of non-negative least squares (NNLS) for weighting of individual atlases and
+subsequent refinement to remove systematic labeling error employs a four-class
+random forest (RF) approach based on true/false x positive/negative classifications.  
+A leave-one-out evaluation was performed on two data sets (one public and one private)
+consisting of separate subparcellation schemes (denoted as "Penn" and "UCI")
+
+Results:  Warping of individual atlases to the target image resulted in an
+average Dice value over all labels:  Penn: left = 0.587, right = 0.570 and UCI:
+left = 0.667, right = 0.680.  NNLS JLF:  Penn:  left = 0.751, right = 0.744 and
+UCI:  left = 0.776, right = 0.779.  RF Refinement:  Penn:  left = 0.762, right =
+0.754 and UCI:  left = 0.793, right = 0.785.
+
+Conclusions:  We provide an open-source pipeline for estimation of hippocampal
+subfields using consensus labeling and refinement which yields good performance.
+Results were applied to T1/T2 data but the framework is sufficiently general to
+accommodate other imaging protocols (e.g. T1-only).
+
+
+[1] P. Yushkevich, et al., Automated Volumetry and Regional Thickness Analysis of
+Hippocampal Subfields and Medial Temporal COrtical Structures in Mild Cognitive
+Impairment, Human Brain Mapping, 26:258-287, 2015.

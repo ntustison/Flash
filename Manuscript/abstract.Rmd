@@ -1,0 +1,45 @@
+
+# Abstract
+
+Contributions:
+
+* joint fusion
+
+    * NNLS
+
+    * multi-threaded
+
+    * remove directionality bias in search neighborhood
+
+    * open-source implementation in ANTs (ITK-Style)
+
+    * joint intensity fusion
+
+* corrective learning
+
+    * replace AdaBoost framework with random forest
+
+    * binary labels correct classification vs. misclassification (old) vs. four labels
+      (true, false) $\times$ (positive, negative).
+
+    * open source R implementation
+
+        * ``segmentationRefinement.train``
+        * ``segmentationRefinement.predict``
+
+* remove study-specific "heuristics"
+
+* T1/T2 evaluation on three publicly available data sets + 1 private data set (which will also be made
+  publicly available?)
+
+    * Yushkevich "PennData"
+
+    * MniData
+
+    * Winterburn data
+
+    * Stark training set
+
+* T1 only evaluation on the same data sets
+
+\clearpage

@@ -1,0 +1,198 @@
+\documentclass[ignorenonframetext,]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usetheme{AnnArbor}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+
+% \pgfdeclareimage[width=1cm]{logo}{../Figures/monkeyTypewriter.png}
+%\logo{\pgfuseimage{logo}}
+
+\institute{UCI}
+\definecolor{links}{RGB}{42, 27, 129}
+\definecolor{mypink2}{RGB}{219, 48, 122}
+%\hypersetup{colorlinks,linkcolor=links,urlcolor=mypink2}
+\usefonttheme{professionalfonts}
+
+% \setbeamerfont{note page}{family*=pplx,size=\footnotesize} % Palatino for notes
+
+\setbeamerfont{subtitle}{size=\small}
+
+\definecolor{uciblue}{RGB}{0,100,164}
+\definecolor{ucilibraryorange}{RGB}{255,210,0}
+\definecolor{ucicream}{RGB}{241,229,199}
+\definecolor{ucilightblue}{RGB}{163,220,230}
+
+\setbeamercolor{block body}{bg=green,fg=green}
+\setbeamercolor{block body alerted}{bg=green,fg=green}
+\setbeamercolor{block body example}{bg=green,fg=green}
+
+\setbeamercolor{caption name}{fg=uciblue}
+
+\setbeamercolor{headline}{fg=ucicream,bg=ucicream}
+\setbeamercolor{section}{fg=ucilibraryorange,bg=uciblue}
+\setbeamercolor{frametitle}{fg=ucilibraryorange,bg=uciblue}
+\setbeamercolor{palette primary}{bg=ucilibraryorange,fg=uciblue}
+\setbeamercolor{palette secondary}{bg=uciblue,fg=uciblue}
+\setbeamercolor{palette tertiary}{bg=ucilibraryorange,fg=uciblue}
+\setbeamercolor{palette quarternary}{fg=ucilibraryorange,bg=uciblue}
+\setbeamercolor{palette sidebar primary}{bg=ucilibraryorange,fg=uciblue}
+\setbeamercolor{palette sidebar secondary}{fg=uciblue,bg=uciblue}
+\setbeamercolor{palette sidebar tertiary}{fg=ucilibraryorange,bg=uciblue}
+\setbeamercolor{palette sidebar quarternary}{fg=ucilibraryorange,bg=uciblue}
+\setbeamercolor{structure}{bg=uciblue}
+
+
+
+\useinnertheme{rectangles}
+
+\titlegraphic{\vspace{-7.5mm}\includegraphics[width=0.45\paperwidth]{../Figures/monkeyTypewriter.png}}
+
+\title{ASHS revisited --- can we do better?}
+\author{Nick Tustison and Mike Yassa}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{Motivation}\label{motivation}
+
+\begin{frame}{Main components of ASHS}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/ashs.png}
+
+\end{frame}
+
+\section{Joint Label Fusion}\label{joint-label-fusion}
+
+\begin{frame}[fragile]{Modifications}
+
+\begin{itemize}
+\tightlist
+\item
+  Registration
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{antsRegistration}
+  \item
+    B-spline SyN (``\texttt{-t\ BSplineSyN{[}...{]}}'')
+  \item
+    generic label interpolation
+    (``\texttt{-n\ GenericLabel{[}Linear{]}}'')
+  \end{itemize}
+\item
+  \texttt{jointfusion} \(\rightarrow\) \texttt{antsJointFusion}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    non-negative least squares option (vs.~SVD)
+  \item
+    joint intensity fusion
+  \item
+    multi-threaded
+  \item
+    memory issues
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\section{Corrective learning}\label{corrective-learning}
+
+\begin{itemize}
+\tightlist
+\item
+  random forests \& extreme gradient boosting (vs.~AdaBoost)
+\item
+  4 classes (vs.~2 classes)
+\item
+  implementation in ANTsR
+\end{itemize}
+
+\begin{frame}{Incorporate more prior knowledge}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning001.png}
+
+\end{frame}
+
+\begin{frame}{Two-Class AdaBoost}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
+
+\end{frame}
+
+\begin{frame}{Four-Class Random Forest or Extreme Gradient Boosting}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
+
+\end{frame}
+
+\section{Results: Penn Data}\label{results-penn-data}
+
+\section*{Results: UCI Data}\label{results-uci-data}
+\addcontentsline{toc}{section}{Results: UCI Data}
+
+\hypertarget{refs}{}
+
+\end{document}

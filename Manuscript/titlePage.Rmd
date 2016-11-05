@@ -1,0 +1,55 @@
+
+<!--
+
+{\bf Fused labeling for the automatic subparcellation of the hippocampus}
+
+-->
+
+
+\vspace{6 cm}
+
+\begin{centering}
+
+\LARGE
+
+{\bf Multi-atlas intensity and label fusion with supervised segmentation refinement for
+     the automatic subparcellation of the hippocampus}
+
+
+\vspace{1 cm}
+
+\large
+Nicholas J. Tustison$^{1,2}$,
+Brian B. Avants$^3$,
+\ldots,
+Hongzhi Wang$^4$,
+\ldots,
+Michael A. Yassa$^2$
+
+\vspace{0.5 cm}
+
+\small
+
+$^1$Department of Radiology and Medical Imaging, University of Virginia, Charlottesville, VA
+
+$^2$Department of Neurobiology and Behavior, University of California, Irvine, Irvine, CA
+
+$^3$ Biogen, Cambridge, MA
+
+$^4$ IBM Almaden Research Center
+
+\end{centering}
+
+
+\vspace{4.5 cm}
+
+\normalsize
+
+Corresponding author: \
+Nicholas J. Tustison \
+4173 Cardamon Circle \
+Corona, CA  92883 \
+540-383-2719 \
+ntustison@virginia.edu \
+
+
