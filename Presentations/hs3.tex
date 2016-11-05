@@ -59,7 +59,7 @@
 \setcounter{secnumdepth}{0}
 
 
-% \pgfdeclareimage[width=1cm]{logo}{../Figures/monkeyTypewriter.png}
+% \pgfdeclareimage[width=1cm]{logo}{../Figures/antsCollaborators2.png}
 %\logo{\pgfuseimage{logo}}
 
 \institute{UCI}
@@ -100,7 +100,7 @@
 
 \useinnertheme{rectangles}
 
-\titlegraphic{\vspace{-7.5mm}\includegraphics[width=0.45\paperwidth]{../Figures/monkeyTypewriter.png}}
+\titlegraphic{\vspace{-7.5mm}\includegraphics[width=0.45\paperwidth]{../Figures/antsCollaborators2.png}}
 
 \title{ASHS revisited --- can we do better?}
 \author{Nick Tustison and Mike Yassa}
@@ -157,31 +157,67 @@
 
 \section{Corrective learning}\label{corrective-learning}
 
+\begin{frame}{Modifications}
+
 \begin{itemize}
 \tightlist
 \item
-  random forests \& extreme gradient boosting (vs.~AdaBoost)
+  ANTsR implementation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    open-source
+  \item
+    easy to
+    \href{https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R\#L375-L413}{change}
+    machine learning techniques
+  \end{itemize}
 \item
-  4 classes (vs.~2 classes)
+  machine learning technique
+
+  \begin{itemize}
+  \tightlist
+  \item
+    AdaBoost (original ASHS)
+  \item
+    random forests
+  \item
+    extreme gradient boosting
+  \end{itemize}
 \item
-  implementation in ANTsR
+  prior knowledge
+
+  \begin{itemize}
+  \tightlist
+  \item
+    two classes (original ASHS)
+  \item
+    four classes
+  \end{itemize}
 \end{itemize}
 
-\begin{frame}{Incorporate more prior knowledge}
+\end{frame}
+
+\begin{frame}{Machine learning technique}
+
+\end{frame}
+
+\begin{frame}{Incorporate additional prior knowledge}
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning001.png}
 
 \end{frame}
 
-\begin{frame}{Two-Class AdaBoost}
+\begin{frame}{Two-class AdaBoost}
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
 
 \end{frame}
 
-\begin{frame}{Four-Class Random Forest or Extreme Gradient Boosting}
+\begin{frame}{Four-class Random Forest or Extreme Gradient Boosting}
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}

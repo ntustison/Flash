@@ -50,22 +50,32 @@ output:
 
 # Corrective learning
 
-* random forests & extreme gradient boosting (vs. AdaBoost)
-* 4 classes (vs. 2 classes)
-* implementation in ANTsR
+## Modifications
 
+* ANTsR implementation
+    * open-source
+    * easy to [change](https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R#L375-L413) machine learning techniques
+* machine learning technique
+    * AdaBoost (original ASHS)
+    * random forests
+    * extreme gradient boosting
+* prior knowledge
+    * two classes (original ASHS)
+    * four classes
 
-## Incorporate more prior knowledge
+## Machine learning technique
+
+## Incorporate additional prior knowledge
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning001.png}
 
-## Two-Class AdaBoost
+## Two-class AdaBoost
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
 
-## Four-Class Random Forest or Extreme Gradient Boosting
+## Four-class Random Forest or Extreme Gradient Boosting
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
