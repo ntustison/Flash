@@ -10,7 +10,7 @@
 
 -->
 
-## Main components of ASHS
+## ASHS overview
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/ashs.png}
@@ -20,31 +20,105 @@
 ## Modifications
 
 * Registration
-    * ``antsRegistration``
+    * ``ANTS`` $\rightarrow$ ``antsRegistration``
     * B-spline SyN ("``-t BSplineSyN[...]``")
+    * ``WarpImageMultiTransform`` $\rightarrow$ ``antsApplyTransforms``
     * generic label interpolation  ("``-n GenericLabel[Linear]``")
 * ``jointfusion`` $\rightarrow$ ``antsJointFusion``
     * non-negative least squares option (vs. SVD)
-    * joint intensity fusion
     * multi-threaded
     * memory issues
+    * joint intensity fusion
+
+## Registration --- beyond original SyN
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_ITK.png}
+
+\vspace{2mm}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_BSplineSyN.png}
+
+## T2 joint intensity fusion
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifNormalization.png}
+
+## T2 joint intensity fusion sample results
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifResults.png}
 
 # Corrective learning
 
 ## Modifications
 
-* ANTsR implementation
-    * open-source
-    * easy to [change](https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R#L375-L413) machine learning techniques
 * machine learning technique
     * AdaBoost (original ASHS)
     * random forests
     * extreme gradient boosting
+* ANTsR implementation
+    * open-source
+    * easy to [change](https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R#L375-L413) machine learning techniques
 * prior knowledge
     * two classes (original ASHS)
     * four classes
 
-## Machine learning technique
+
+<!--
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_42.png}
+
+<p style="text-align: center; font-size: 4px">http://www.yisongyue.com/courses/cs155/2016_winter/lectures/Lecture_01.pdf</p>
+
+## $error = bias + variance$
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_43.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_44.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_45.png}
+
+## $error = bias + variance$
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Lecture01/Lecture_01_46.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_47.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_48.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_49.png}
+-->
+
+##
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/machineLearningTechniques.png}
+
+##  ANTsR facilitates technique substitution
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/segRefinement.png}
 
 ## Incorporate additional prior knowledge
 
@@ -61,7 +135,20 @@
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
 
-# Results:  Penn Data
+# Results
 
-# Results:  UCI Data
+## Summary
 
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/summaryResults.png}
+
+
+## Penn Data
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/pennResults.png}
+
+## UCI Data
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/uciResults.png}

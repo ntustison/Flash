@@ -111,7 +111,7 @@
 
 \section{Motivation}\label{motivation}
 
-\begin{frame}{Main components of ASHS}
+\begin{frame}{ASHS overview}
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/ashs.png}
@@ -130,9 +130,12 @@
   \begin{itemize}
   \tightlist
   \item
-    \texttt{antsRegistration}
+    \texttt{ANTS} \(\rightarrow\) \texttt{antsRegistration}
   \item
     B-spline SyN (``\texttt{-t\ BSplineSyN{[}...{]}}'')
+  \item
+    \texttt{WarpImageMultiTransform} \(\rightarrow\)
+    \texttt{antsApplyTransforms}
   \item
     generic label interpolation
     (``\texttt{-n\ GenericLabel{[}Linear{]}}'')
@@ -145,13 +148,39 @@
   \item
     non-negative least squares option (vs.~SVD)
   \item
-    joint intensity fusion
-  \item
     multi-threaded
   \item
     memory issues
+  \item
+    joint intensity fusion
   \end{itemize}
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Registration --- beyond original SyN}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_ITK.png}
+
+\vspace{2mm}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_BSplineSyN.png}
+
+\end{frame}
+
+\begin{frame}{T2 joint intensity fusion}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifNormalization.png}
+
+\end{frame}
+
+\begin{frame}{T2 joint intensity fusion sample results}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifResults.png}
 
 \end{frame}
 
@@ -161,18 +190,6 @@
 
 \begin{itemize}
 \tightlist
-\item
-  ANTsR implementation
-
-  \begin{itemize}
-  \tightlist
-  \item
-    open-source
-  \item
-    easy to
-    \href{https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R\#L375-L413}{change}
-    machine learning techniques
-  \end{itemize}
 \item
   machine learning technique
 
@@ -184,6 +201,18 @@
     random forests
   \item
     extreme gradient boosting
+  \end{itemize}
+\item
+  ANTsR implementation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    open-source
+  \item
+    easy to
+    \href{https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R\#L375-L413}{change}
+    machine learning techniques
   \end{itemize}
 \item
   prior knowledge
@@ -199,7 +228,17 @@
 
 \end{frame}
 
-\begin{frame}{Machine learning technique}
+\begin{frame}{}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/machineLearningTechniques.png}
+
+\end{frame}
+
+\begin{frame}{ANTsR facilitates technique substitution}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/segRefinement.png}
 
 \end{frame}
 
@@ -224,11 +263,29 @@
 
 \end{frame}
 
-\section{Results: Penn Data}\label{results-penn-data}
+\section{Results}\label{results}
 
-\section*{Results: UCI Data}\label{results-uci-data}
-\addcontentsline{toc}{section}{Results: UCI Data}
+\begin{frame}{Summary}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/summaryResults.png}
+
+\end{frame}
+
+\begin{frame}{Penn Data}
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/pennResults.png}
+
+\end{frame}
+
+\begin{frame}{UCI Data}
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/uciResults.png}
 
 \hypertarget{refs}{}
+
+\end{frame}
 
 \end{document}
