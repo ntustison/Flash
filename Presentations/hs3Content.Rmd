@@ -130,7 +130,7 @@
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
 
-## Four-class Random Forest or Extreme Gradient Boosting
+## Four-class random forest or extreme gradient boosting
 
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
@@ -142,6 +142,18 @@
 \centering
 \includegraphics[width=0.85 \textwidth]{../Figures/summaryResults.png}
 
+## Data overview
+
+* Penn data
+    * Yushkevich et al., Hum Brain Mapp. 2015 Jan; 36(1): 258–287.
+    * 29 subjects
+    * 10 labels per hemisphere (2 are discarded prior to analysis)
+    * hippocampal subfields and extrahippocampal cortical structures (ERC/PRC/PHC)
+
+* UCI Data ("Stark Training Set")
+    * 19 subjects
+    * 3 labels per hemisphere
+    * ?
 
 ## Penn Data
 
