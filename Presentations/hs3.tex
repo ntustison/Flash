@@ -29,6 +29,12 @@
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 \newif\ifbibliography
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 
 % Prevent slide breaks in the middle of a paragraph:
 \widowpenalties 1 10000
@@ -307,17 +313,47 @@
 
 \end{frame}
 
-\begin{frame}{Penn Data}
+\begin{frame}{Penn data}
 
 \centering
 \includegraphics[width=1 \textwidth]{../Figures/pennResults.png}
 
 \end{frame}
 
-\begin{frame}{UCI Data}
+\begin{frame}{UCI data}
 
 \centering
 \includegraphics[width=1 \textwidth]{../Figures/uciResults.png}
+
+\end{frame}
+
+\begin{frame}{Penn data: JLF T1-only}
+
+\begin{longtable}[c]{@{}lrrrrrrrrr@{}}
+\toprule
+& all & 1 & 2 & 3 & 4 & 8 & 9 & 11 & 12\tabularnewline
+\midrule
+\endhead
+left & 0.61 & 0.65 & 0.08 & 0.70 & 0.33 & 0.53 & 0.61 & 0.48 &
+0.58\tabularnewline
+right & 0.56 & 0.62 & 0.10 & 0.67 & 0.32 & 0.53 & 0.58 & 0.42 &
+0.51\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{frame}
+
+\begin{frame}{UCI data: JLF T1-only}
+
+\begin{longtable}[c]{@{}lrrrrrrr@{}}
+\toprule
+& all & 13 & 15 & 17 & 14 & 16 & 18\tabularnewline
+\midrule
+\endhead
+left & 0.739 & 0.708 & 0.753 & 0.732 & NaN & NaN & NaN\tabularnewline
+right & 0.738 & NaN & NaN & NaN & 0.705 & 0.752 & 0.735\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{refs}{}
 

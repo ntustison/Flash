@@ -155,12 +155,64 @@
     * 3 labels per hemisphere
     * ?
 
-## Penn Data
+## Penn data
 
 \centering
 \includegraphics[width=1 \textwidth]{../Figures/pennResults.png}
 
-## UCI Data
+## UCI data
 
 \centering
 \includegraphics[width=1 \textwidth]{../Figures/uciResults.png}
+
+
+## Penn data:  JLF T1-only
+
+```{r kable1, echo = FALSE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresJlfT1Only_PennData.csv' )
+
+labels <- c( 'all', '1', '2', '3', '4', '8', '9', '11', '12' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ]) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 2 )
+```
+
+
+## UCI data:  JLF T1-only
+
+```{r kable2, echo = FALSE, eval = TRUE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresJlfT1Only_StarkTrainingSet.csv' )
+
+labels <- c( 'all', '13', '15', '17', '14', '16', '18' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ]) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 3 )
+```
