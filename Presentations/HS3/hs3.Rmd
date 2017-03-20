@@ -1,0 +1,286 @@
+---
+title: ASHS revisited --- can we do better?
+subtitle:
+author: Nick Tustison and Mike Yassa
+bibliography: references.bib
+output:
+  beamer_presentation:
+    colortheme: dolphin
+    fonttheme:  professionalfonts
+    highlight: tango
+    incremental: false
+    theme:  AnnArbor
+    includes:
+      in_header: mystyle.tex
+ #   toc: yes
+    keep_tex: yes
+    slide_level: 2
+---
+
+
+# Motivation
+
+<!--
+
+* Difficult to run
+* What is the effect of the heuristics?
+* Does not use the the latest technology.
+* What about all the T1 data?
+
+-->
+
+## ASHS overview
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/ashs.png}
+
+# Joint Label Fusion
+
+## Modifications
+
+* Registration
+    * ``ANTS`` $\rightarrow$ ``antsRegistration``
+    * B-spline SyN ("``-t BSplineSyN[...]``")
+    * ``WarpImageMultiTransform`` $\rightarrow$ ``antsApplyTransforms``
+    * generic label interpolation  ("``-n GenericLabel[Linear]``")
+* ``jointfusion`` $\rightarrow$ ``antsJointFusion``
+    * non-negative least squares option (vs. SVD)
+    * multi-threaded
+    * memory issues
+    * joint intensity fusion
+
+## Registration --- beyond original SyN
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_ITK.png}
+
+\vspace{2mm}
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Frontiers_BSplineSyN.png}
+
+## T2 joint intensity fusion
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifNormalization.png}
+
+## T2 joint intensity fusion sample results
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/jifResults.png}
+
+# Corrective learning
+
+## Modifications
+
+* machine learning technique
+    * AdaBoost (original ASHS)
+    * random forests
+    * extreme gradient boosting
+* ANTsR implementation
+    * open-source
+    * easy to [change](https://github.com/stnava/ANTsR/blob/master/R/segmentationRefinement.R#L375-L413) machine learning techniques
+* prior knowledge
+    * two classes (original ASHS)
+    * four classes
+
+
+<!--
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_42.png}
+
+<p style="text-align: center; font-size: 4px">http://www.yisongyue.com/courses/cs155/2016_winter/lectures/Lecture_01.pdf</p>
+
+## $error = bias + variance$
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_43.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_44.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_45.png}
+
+## $error = bias + variance$
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/Lecture01/Lecture_01_46.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_47.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_48.png}
+
+##
+
+\centering
+\includegraphics[width=1.0 \textwidth]{../Figures/Lecture01/Lecture_01_49.png}
+-->
+
+##
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/machineLearningTechniques.png}
+
+##  ANTsR facilitates technique substitution
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/segRefinement.png}
+
+## Incorporate additional prior knowledge
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning001.png}
+
+## Two-class AdaBoost
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning002.png}
+
+## Four-class random forest or extreme gradient boosting
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/correctiveLearning003.png}
+
+# Results
+
+## Summary
+
+\centering
+\includegraphics[width=0.85 \textwidth]{../Figures/summaryResults.png}
+
+## Data overview
+
+* Penn data
+    * Yushkevich et al., Hum Brain Mapp. 2015 Jan; 36(1): 258–287.
+    * 29 subjects
+    * 10 labels per hemisphere (2 are discarded prior to analysis)
+    * hippocampal subfields and extrahippocampal cortical structures (ERC/PRC/PHC)
+
+* UCI Data ("Stark Training Set")
+    * 19 subjects
+    * 3 labels per hemisphere
+    * ?
+
+## Penn data
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/pennResults.png}
+
+## UCI data
+
+\centering
+\includegraphics[width=1 \textwidth]{../Figures/uciResults.png}
+
+
+## Penn data:  JLF T1-only
+
+```{r kable1, echo = FALSE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresJlfT1Only_PennData.csv' )
+
+labels <- c( 'all', '1', '2', '3', '4', '8', '9', '11', '12' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ]) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 2 )
+```
+
+## Penn data:  Xgb Min T1-only
+
+```{r kableXgbMinPenn, echo = FALSE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresXgbMinT1Only_PennData.csv' )
+
+labels <- c( 'all', '1', '2', '3', '4', '8', '9', '11', '12' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ], na.rm = TRUE) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 2 )
+```
+
+## UCI data:  JLF T1-only
+
+```{r kableJlfStark, echo = FALSE, eval = TRUE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresJlfT1Only_StarkTrainingSet.csv' )
+
+labels <- c( 'all', '13', '15', '17', '14', '16', '18' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ]) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 3 )
+```
+
+## UCI data:  Xgb Min T1-only
+
+```{r kableXgbStark, echo = FALSE, eval = TRUE}
+library( knitr )
+
+lo <- read.csv( '../Data/labelOverlapMeasuresXgbMinT1Only_StarkTrainingSet.csv' )
+
+labels <- c( 'all', '13', '15', '17', '14', '16', '18' )
+hemispheres <- c( 'left', 'right' )
+
+diceAverages <- matrix( data = NA, nrow = length( hemispheres ), ncol = length( labels ) )
+
+for( i in 1:length( hemispheres ) )
+  {
+  for( j in 1:length( labels ) )
+    {
+    diceAverages[i, j] <- as.numeric( mean( lo$dice[ which( lo$label == labels[j] & lo$hemisphere == hemispheres[i] ) ]) )
+    }
+  }
+colnames( diceAverages ) <- labels
+rownames( diceAverages ) <- hemispheres
+
+kable( diceAverages, digits = 3 )
+```
